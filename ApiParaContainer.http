@@ -1,0 +1,6 @@
+@ApiParaContainer_HostAddress = http://localhost:5027
+
+GET {{ApiParaContainer_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

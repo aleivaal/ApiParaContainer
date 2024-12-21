@@ -1,0 +1,38 @@
+version: '3.4'
+ 
+
+services:
+  cliente_api:
+    container_name: cliente_api
+    build:
+      context: ./MsClientes
+      dockerfile: Dockerfile
+    ports:
+      - "5000:8080"
+    depends_on:
+      - docker_sqlserver
+  cuenta_api:
+    container_name: cuenta_api
+    build:
+      context: ./MsCuentas
+      dockerfile: Dockerfile
+    ports:
+      - "5001:8080"
+    depends_on:
+      - docker_sqlserver 
+  tarjeta_api:
+    container_name: tarjeta_api
+    build:
+      context: ./MsTarjetas
+      dockerfile: Dockerfile
+    ports:
+      - "5002:8080"
+    depends_on:
+      - docker_sqlserver 
+  docker_sqlserver:
+    container_name: docker_sqlserver
+    build:
+      context: .
+      dockerfile: db.Dockerfile
+    ports:
+      - "1433:1433"

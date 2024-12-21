@@ -1,0 +1,6 @@
+- El problema con la migración
+- El tener que ponerle nombre diferente a cada migracion
+- Se creo cada proyecto aparte
+- El archivo docker-composer afuera en la carpeta raíz
+- Los puertos que se asignaron a cada micro
+- El comando usado por la versión del docker-compose

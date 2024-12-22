@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Modelos;
+using MSClientes.ServiciosExternos;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -10,10 +11,13 @@ using System.Threading.Tasks;
 public class ClientesController : ControllerBase
 {
     private readonly BancoContext _context;
+    private readonly IServicioTarjetas _elServicioTarjetas;
 
-    public ClientesController(BancoContext context)
+    public ClientesController(BancoContext context, IServicioTarjetas elServicioTarjetas )
     {
+
         _context = context;
+        this._elServicioTarjetas = elServicioTarjetas;
     }
 
     // GET: api/Clientes
@@ -22,6 +26,19 @@ public class ClientesController : ControllerBase
     {
         return await _context.Clientes.ToListAsync();
     }
+
+    [HttpGet("GetClientesConTarjetas")]
+    public async Task<ActionResult<IEnumerable<Cliente>>> GetClientesConTarjetas()
+    {
+        
+        var losClientes = await _context.Clientes.ToListAsync();
+        foreach (var cliente in losClientes)
+        {
+            cliente.Tarjetas = await _elServicioTarjetas.obtenerTarjetasDeCliente(cliente.IdCliente);
+        }
+        return losClientes;
+    }
+
 
     // GET: api/Clientes/5
     [HttpGet("{id}")]

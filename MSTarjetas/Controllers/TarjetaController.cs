@@ -25,9 +25,9 @@ public class TarjetasController : ControllerBase
 
     // GET: api/Tarjetas/5
     [HttpGet("{idCliente}")]
-    public async Task<ActionResult<IEnumerable<Tarjeta>>> GetTarjetasCliente(int IdCliente)
+    public async Task<ActionResult<IEnumerable<Tarjeta>>> GetTarjetas(int idCliente)
     {
-        var tarjeta = await _context.Tarjetas.Where(c => c.IdCliente == IdCliente).ToListAsync();
+        var tarjeta = await _context.Tarjetas.Where(c => c.IdCliente == idCliente).ToListAsync();
 
         if (tarjeta == null)
         {

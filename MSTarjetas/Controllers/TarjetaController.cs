@@ -2,7 +2,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Modelos;
+using MSClientes.ServiciosExternos;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Threading.Tasks;
 
 [Route("api/[controller]")]
@@ -10,10 +12,12 @@ using System.Threading.Tasks;
 public class TarjetasController : ControllerBase
 {
     private readonly BancoContext _context;
+    private readonly IServicioCuentas _elServicioCuentas;
 
-    public TarjetasController(BancoContext context)
+    public TarjetasController(BancoContext context, IServicioCuentas elServicioCuentas)
     {
         _context = context;
+        this._elServicioCuentas = elServicioCuentas;
     }
 
     // GET: api/Tarjetas
@@ -22,6 +26,19 @@ public class TarjetasController : ControllerBase
     {
         return await _context.Tarjetas.ToListAsync();
     }
+
+    [HttpGet("GetTarjetasConCuentaAsociada")]
+    public async Task<ActionResult<IEnumerable<Tarjeta>>> GetTarjetasConCuentaAsociada()
+    {
+        var Tarjetas = await _context.Tarjetas.ToListAsync();
+        foreach (var tarjeta in Tarjetas)
+        {
+            tarjeta.CuentaAsociada = await _elServicioCuentas.obtenerCuentaDeTarjeta(tarjeta.idTarjeta);
+        }
+        return Tarjetas;
+    }
+
+
 
     // GET: api/Tarjetas/5
     [HttpGet("{idCliente}")]
@@ -36,6 +53,9 @@ public class TarjetasController : ControllerBase
 
         return tarjeta;
     }
+
+
+
 
     // POST: api/Tarjetas
     [HttpPost]

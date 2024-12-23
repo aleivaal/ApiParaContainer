@@ -14,7 +14,7 @@ namespace Modelos
         public List<Tarjeta>? Tarjetas { get; set; }
 
 
-        //public ICollection<Tarjeta>? Tarjetas { get; set; } //
+        
     }
 
 }

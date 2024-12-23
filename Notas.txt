@@ -12,6 +12,10 @@
 - Not mapped
 - Hay qeu poner la solución para que levante los tres proyectos pues son independiente
 - Pantallazo de los tres
+- Dirección git hub
+- Tarjetas con cuenta asociada: Si se obtiene todas las tarejtas, la cuenta viene null, el método GetTarjetasConCuentaAsociada primero obtiene las tarjetas (localmente)  y mediante api se comunica con el otro microservicio en el puerto tal y obtiene la cuenta de dicha tarjeta
+- Clientes con sus tarjetas: Si se obtiene solo clientes, no vienen sus tarjetas, GetClientesConTarjetas obtiene todos sus clientes con sus tarjetas (pero sin cuenta)
+- Lo de modificar el docker para incluir proyectos dependientes
 
 
 

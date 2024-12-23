@@ -11,12 +11,12 @@ namespace AccesoDatos
         }
 
 
-        public DbSet<Cuentas> Cuentas { get; set; }
+        public DbSet<Cuenta> Cuentas { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Cuentas>(entity =>
+            modelBuilder.Entity<Cuenta>(entity =>
             {
                 entity.HasKey(e => e.idCuenta);
                 entity.Property(e => e.idTarjeta).IsRequired();
@@ -25,10 +25,10 @@ namespace AccesoDatos
 
             });
 
-            modelBuilder.Entity<Cuentas>().HasData(
-                new Cuentas { idCuenta=1, idTarjeta = 1, CuentaIBAN = "CR1234567890", Saldo = 100 },
-                new Cuentas { idCuenta = 2, idTarjeta = 2, CuentaIBAN = "CR9876543210", Saldo = 200 },
-                new Cuentas { idCuenta = 3, idTarjeta = 3, CuentaIBAN = "CR777777777", Saldo = 300 }
+            modelBuilder.Entity<Cuenta>().HasData(
+                new Cuenta { idCuenta=1, idTarjeta = 1, CuentaIBAN = "CR1234567890", Saldo = 100 },
+                new Cuenta { idCuenta = 2, idTarjeta = 2, CuentaIBAN = "CR9876543210", Saldo = 200 },
+                new Cuenta { idCuenta = 3, idTarjeta = 3, CuentaIBAN = "CR777777777", Saldo = 300 }
             );
         }
     }

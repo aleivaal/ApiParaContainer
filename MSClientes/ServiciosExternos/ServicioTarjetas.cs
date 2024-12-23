@@ -7,7 +7,9 @@ namespace MSClientes.ServiciosExternos
 
         public Task<List<Tarjeta>> obtenerTarjetasDeCliente(int idCliente)
         {
-            return UtilitarioHTTPClient.InvocarApiAsync<List<Tarjeta>>($"http://localhost:5029/api/Tarjetas/{idCliente}");
+            var urlServicio = $"http://tarjeta_api:8080/api/Tarjetas/{idCliente}";
+            Console.WriteLine($"Invocando... {urlServicio}");
+            return UtilitarioHTTPClient.InvocarApiAsync<List<Tarjeta>>(urlServicio);
         }
     }
 }

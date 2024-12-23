@@ -1,7 +1,7 @@
 ﻿namespace Modelos
 {
 
-    public class Cuentas
+    public class Cuenta
     {
         public int  idCuenta { get; set; }
         public int idTarjeta { get; set; }

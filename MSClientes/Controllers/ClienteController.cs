@@ -12,12 +12,14 @@ public class ClientesController : ControllerBase
 {
     private readonly BancoContext _context;
     private readonly IServicioTarjetas _elServicioTarjetas;
+    private readonly IServicioCuentas _elServicioCuentas;
 
-    public ClientesController(BancoContext context, IServicioTarjetas elServicioTarjetas )
+    public ClientesController(BancoContext context, IServicioTarjetas elServicioTarjetas, IServicioCuentas elServicioCuentas )
     {
 
         _context = context;
         this._elServicioTarjetas = elServicioTarjetas;
+        this._elServicioCuentas = elServicioCuentas;
     }
 
     // GET: api/Clientes
@@ -35,6 +37,22 @@ public class ClientesController : ControllerBase
         foreach (var cliente in losClientes)
         {
             cliente.Tarjetas = await _elServicioTarjetas.obtenerTarjetasDeCliente(cliente.IdCliente);
+        }
+        return losClientes;
+    }
+
+    [HttpGet("GetInformacionCompleta")]
+    public async Task<ActionResult<IEnumerable<Cliente>>> GetInformacionCompleta()
+    {
+
+        var losClientes = await _context.Clientes.ToListAsync();
+        foreach (var cliente in losClientes)
+        {
+            cliente.Tarjetas = await _elServicioTarjetas.obtenerTarjetasDeCliente(cliente.IdCliente);
+            foreach (var tarjeta in cliente.Tarjetas)
+            {
+                tarjeta.CuentaAsociada = await _elServicioCuentas.obtenerCuentaDeTarjeta(tarjeta.idTarjeta);
+            }
         }
         return losClientes;
     }

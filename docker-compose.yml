@@ -8,7 +8,7 @@ services:
       context: ./MsClientes
       dockerfile: Dockerfile
     ports:
-      - "5000:8080"
+      - "5027:8080"
     depends_on:
       - docker_sqlserver
   cuenta_api:
@@ -17,7 +17,7 @@ services:
       context: ./MsCuentas
       dockerfile: Dockerfile
     ports:
-      - "5001:8080"
+      - "5028:8080"
     depends_on:
       - docker_sqlserver 
   tarjeta_api:
@@ -26,7 +26,7 @@ services:
       context: ./MsTarjetas
       dockerfile: Dockerfile
     ports:
-      - "5002:8080"
+      - "5029:8080"
     depends_on:
       - docker_sqlserver 
   docker_sqlserver:

@@ -1,4 +1,6 @@
-﻿namespace Modelos
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Modelos
 {
 
     public class Cliente
@@ -7,6 +9,12 @@
         public string? Nombre { get; set; }
 
         public string? Direccion { get; set; }
+
+        [NotMapped]
+        public List<Tarjeta>? Tarjetas { get; set; }
+
+
+        
     }
 
 }

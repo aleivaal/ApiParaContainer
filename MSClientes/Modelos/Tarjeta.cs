@@ -1,5 +1,4 @@
-﻿using System.ComponentModel;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Modelos
 {
@@ -13,7 +12,7 @@ namespace Modelos
         public string? TipoTarjeta { get; set; }
 
         [NotMapped]
-        public Cuenta? CuentaAsociada  {  get; set; }
+        public Cuenta? CuentaAsociada { get; set; }
     }
 
 }

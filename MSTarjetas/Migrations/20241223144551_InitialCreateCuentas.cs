@@ -7,7 +7,7 @@
 namespace MSTarjetas.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreateTarjetas : Migration
+    public partial class InitialCreateCuentas : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

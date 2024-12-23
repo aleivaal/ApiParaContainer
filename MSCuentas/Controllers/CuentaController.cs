@@ -18,16 +18,16 @@ public class CuentasController : ControllerBase
 
     // GET: api/Cuentas
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Cuentas>>> GetCuentas()
+    public async Task<ActionResult<IEnumerable<Cuenta>>> GetCuentas()
     {
         return await _context.Cuentas.ToListAsync();
     }
 
     // GET: api/Cuentas/5
     [HttpGet("{idTarjeta}")]
-    public async Task<ActionResult<IEnumerable<Cuentas>>> GetCuentasTarjeta(int idTarjeta)
+    public async Task<ActionResult<Cuenta>> GetCuentaDeTarjeta(int idTarjeta)
     {
-        var tarjeta = await _context.Cuentas.Where(c => c.idTarjeta == idTarjeta).ToListAsync();
+        var tarjeta = _context.Cuentas.Where(c => c.idTarjeta == idTarjeta).FirstOrDefault();
 
         if (tarjeta == null)
         {
@@ -39,7 +39,7 @@ public class CuentasController : ControllerBase
 
     // POST: api/Cuentas
     [HttpPost]
-    public async Task<ActionResult<Cuentas>> PostTarjeta(Cuentas cuenta)
+    public async Task<ActionResult<Cuenta>> PostTarjeta(Cuenta cuenta)
     {
         _context.Cuentas.Add(cuenta);
         await _context.SaveChangesAsync();
@@ -49,7 +49,7 @@ public class CuentasController : ControllerBase
 
     // PUT: api/Cuentas/5
     [HttpPut("{id}")]
-    public async Task<IActionResult> PutTarjeta(int id, Cuentas tarjeta)
+    public async Task<IActionResult> PutTarjeta(int id, Cuenta tarjeta)
     {
         if (id != tarjeta.idCuenta)
         {

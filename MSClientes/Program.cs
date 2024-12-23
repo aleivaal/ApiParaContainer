@@ -1,5 +1,6 @@
 using AccesoDatos;
 using Microsoft.EntityFrameworkCore;
+using MSClientes.ServiciosExternos;
 using System.Diagnostics;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,6 +15,8 @@ builder.Services.AddSwaggerGen();
 
 //builder.Services.AddSqlServer<BancoContext>("Data Source=LEIVAAA-P\\LOCAL2016;Database=BCCR;Integrated Security=True;Connect Timeout=30;Encrypt=True;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
 builder.Services.AddSqlServer<BancoContext>("SERVER=docker_sqlserver;Initial Catalog=bccr;User Id=sa;Password=myPassword1!;Encrypt=False");
+builder.Services.AddSingleton<IServicioTarjetas, ServicioTarjetas>();
+builder.Services.AddSingleton<IServicioCuentas, ServicioCuentas>();
 Trace.WriteLine("Creando migración");
 var app = builder.Build();
 using (var scope = app.Services.CreateScope())
